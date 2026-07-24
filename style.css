@@ -1,0 +1,270 @@
+/* Variables de Colores Institucionales */
+:root {
+    --brand-orange: #F79131;
+    --dark-purple: #7A2C8E;
+    --accent-green: #4DB748;
+    --bg-light: #f4f7f6;
+    --text-dark: #333333;
+    --text-muted: #666666;
+    --white: #ffffff;
+    --border-color: #e0e0e0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.5;
+}
+
+.header {
+    background-color: var(--dark-purple);
+    color: var(--white);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border-bottom: 4px solid var(--brand-orange);
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+}
+
+.header p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.main-content {
+    max-width: 1300px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+}
+
+.card-box {
+    background-color: var(--white);
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--brand-orange);
+}
+
+.loading-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--white);
+    border-radius: 6px;
+    color: var(--dark-purple);
+}
+
+/* Encabezado de Filtros */
+.filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filters-header h2 {
+    color: var(--dark-purple);
+    font-size: 1.2rem;
+}
+
+.mode-toggle {
+    display: flex;
+    gap: 1rem;
+    background: var(--bg-light);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    border: 1px solid var(--border-color);
+}
+
+.mode-toggle label {
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dark-purple);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Grilla Compacta de Filtros */
+.compact-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.filter-group.text-search {
+    grid-column: 1 / -1; /* Ocupa toda la fila superior */
+}
+
+.filter-group label {
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.filter-group input, .filter-group select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+.filter-group input:focus, .filter-group select:focus {
+    outline: none;
+    border-color: var(--dark-purple);
+    box-shadow: 0 0 0 2px rgba(122, 44, 142, 0.15);
+}
+
+/* Fila de Acciones */
+.actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.stats-box {
+    background-color: rgba(77, 183, 72, 0.1);
+    color: var(--dark-purple);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    border: 1px solid var(--accent-green);
+}
+
+.stats-box strong {
+    color: var(--brand-orange);
+}
+
+.buttons-box {
+    display: flex;
+    gap: 0.8rem;
+    margin-left: auto;
+}
+
+/* Botones */
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary { background-color: var(--brand-orange); color: var(--white); }
+.btn-primary:hover { background-color: #df7e22; }
+
+.btn-secondary { background-color: #e0e0e0; color: var(--text-dark); }
+.btn-secondary:hover { background-color: #d0d0d0; }
+
+.btn-accent { background-color: var(--accent-green); color: var(--white); }
+.btn-accent:hover { background-color: #3e9639; }
+
+.btn-sm { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Tabla y Paginación */
+.table-responsive {
+    overflow-x: auto;
+    border-top: 4px solid var(--dark-purple);
+}
+
+.initial-message {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+}
+
+.initial-message h3 { color: var(--dark-purple); margin-bottom: 0.5rem; }
+
+.ccyt-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 900px;
+}
+
+.ccyt-table th, .ccyt-table td {
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+    text-align: left;
+}
+
+.ccyt-table th {
+    background-color: #f8f9fa;
+    color: var(--dark-purple);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ccyt-table tr:hover {
+    background-color: rgba(247, 145, 49, 0.05);
+}
+
+.table-title { color: var(--dark-purple); font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
+.table-subtitle { color: var(--text-muted); font-size: 0.85rem; }
+
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--white);
+    margin: 0.1rem;
+}
+
+.badge.inicial { background-color: #f1c40f; color: #333; }
+.badge.primaria { background-color: #3498db; }
+.badge.secundaria { background-color: var(--accent-green); }
+
+.detail-text { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+.detail-text strong { color: var(--text-dark); }
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.page-indicator {
+    font-weight: 600;
+    color: var(--dark-purple);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .filters-header { flex-direction: column; align-items: flex-start; }
+    .actions-row, .buttons-box { flex-direction: column; width: 100%; }
+    .buttons-box { margin-left: 0; }
+    .btn { width: 100%; }
+}

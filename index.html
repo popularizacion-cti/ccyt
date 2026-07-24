@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Clubes de Ciencia y Tecnología (CCYT)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- PapaParse para procesar archivos CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Directorio de Clubes de Ciencia y Tecnología</h1>
+            <p>Sistema de búsqueda y filtrado de CCYT</p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Indicador de Carga Inicial -->
+        <div id="loadingMessage" class="loading-state">
+            <h3>Conectando con la base de datos...</h3>
+            <p>Cargando información de los Clubes de Ciencia y Tecnología.</p>
+        </div>
+
+        <!-- Panel de Búsqueda y Filtros -->
+        <section class="controls-section card-box" id="controlsSection" style="display: none;">
+            <div class="filters-header">
+                <h2>Buscador de CCYT</h2>
+                <div class="mode-toggle">
+                    <label><input type="radio" name="searchMode" value="dreUgel" checked> Por DRE/UGEL</label>
+                    <label><input type="radio" name="searchMode" value="ubicacion"> Por Ubicación</label>
+                </div>
+            </div>
+
+            <div class="filters-grid compact-filters">
+                <div class="filter-group text-search">
+                    <label for="searchInput">Buscar por nombre del club o de la I.E</label>
+                    <input type="text" id="searchInput" placeholder="Escribe para buscar...">
+                </div>
+
+                <!-- GRUPO DRE/UGEL -->
+                <div id="dreUgelGroup" class="filter-subset" style="display: contents;">
+                    <div class="filter-group">
+                        <label for="dreFilter">DRE/GRE</label>
+                        <select id="dreFilter" data-default="Todas"><option value="">Todas</option></select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="ugelFilter">UGEL</label>
+                        <select id="ugelFilter" data-default="Todas"><option value="">Todas</option></select>
+                    </div>
+                </div>
+
+                <!-- GRUPO UBICACIÓN (Oculto inicialmente) -->
+                <div id="ubicacionGroup" class="filter-subset" style="display: none;">
+                    <div class="filter-group">
+                        <label for="deptFilter">Departamento</label>
+                        <select id="deptFilter" data-default="Todos"><option value="">Todos</option></select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="provFilter">Provincia</label>
+                        <select id="provFilter" data-default="Todas"><option value="">Todas</option></select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="distFilter">Distrito</label>
+                        <select id="distFilter" data-default="Todos"><option value="">Todos</option></select>
+                    </div>
+                </div>
+
+                <!-- FILTROS COMUNES -->
+                <div class="filter-group">
+                    <label for="areaFilter">Área</label>
+                    <select id="areaFilter" data-default="Todas"><option value="">Todas</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="nivelFilter">Nivel Educativo</label>
+                    <select id="nivelFilter" data-default="Todos">
+                        <option value="">Todos</option>
+                        <option value="Inicial">Inicial</option>
+                        <option value="Primaria">Primaria</option>
+                        <option value="Secundaria">Secundaria</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="gestionFilter">Tipo de Gestión</label>
+                    <select id="gestionFilter" data-default="Todos"><option value="">Todos</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="modalidadFilter">Modalidad</label>
+                    <select id="modalidadFilter" data-default="Todas"><option value="">Todas</option></select>
+                </div>
+            </div>
+            
+            <div class="actions-row">
+                <div class="stats-box" id="statsContainer" style="display: none;">
+                    <span id="statsText">0 CCYT, 0 Instituciones Educativas</span>
+                </div>
+                <div class="buttons-box">
+                    <button id="searchBtn" class="btn btn-primary">Iniciar Búsqueda</button>
+                    <button id="clearBtn" class="btn btn-secondary">Limpiar</button>
+                    <button id="exportBtn" class="btn btn-accent" style="display: none;">Descargar CSV</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultados -->
+        <section class="results-section">
+            <div id="tableContainer" class="table-responsive card-box">
+                <div class="initial-message" id="initialMessage">
+                    <h3>Bienvenido</h3>
+                    <p>Selecciona tus filtros y haz clic en <strong>"Iniciar Búsqueda"</strong> para visualizar el listado de clubes.</p>
+                </div>
+                
+                <!-- La tabla y paginación se generarán aquí -->
+                <div id="tableWrapper" style="display: none;">
+                    <table class="ccyt-table">
+                        <thead>
+                            <tr>
+                                <th width="5%">N°</th>
+                                <th width="15%">Nombre del CCYT</th>
+                                <th width="20%">Institución Educativa</th>
+                                <th width="15%">Ubicación</th>
+                                <th width="15%">DRE / UGEL</th>
+                                <th width="10%">Niveles</th>
+                                <th width="20%">Características</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Filas dinámicas -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="pagination-controls" id="paginationControls">
+                        <button id="btnPrev" class="btn btn-secondary btn-sm" disabled>Anterior</button>
+                        <span id="pageIndicator" class="page-indicator">Página 1 de 1</span>
+                        <button id="btnNext" class="btn btn-secondary btn-sm" disabled>Siguiente</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
