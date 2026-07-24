@@ -312,7 +312,7 @@ function renderTable() {
         tr.innerHTML = `
             <td><strong>${correlativo}</strong></td>
             <td><div class="table-title">${nombreClub}</div></td>
-            <td><div class="table-subtitle">${nombreIE}</div></td>
+            <td><div class="table-subtitle">I.E. ${nombreIE}</div></td>
             <td><div class="detail-text">${ubi}</div></td>
             <td><div class="detail-text">${dregel}</div></td>
             <td>${badgesHtml}</td>
